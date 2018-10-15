@@ -13,22 +13,12 @@ class PcrAPI {
     return this;
   }
   
-  updateData(value1, value2, value3, updateLink) {
-    //let formData = new FormData();
-    //formData.append("value1", value1);
-    //formData.append("value2", value2);
-    //formData.append("value3", value3);
-    //return (
-    //  axios.create()({
-    //    method: 'post',
-    //    url: updateLink,
-    //    data: formData,
-    //  })
-    //);
+  updateData(value1, value2, value3, value4, updateLink) {
     const params = {
       value1: value1,
       value2: value2,
       value3: value3,
+      value4: value4
     }
 
     return this.req.post(updateLink, params)

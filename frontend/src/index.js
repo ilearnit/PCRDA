@@ -20,44 +20,51 @@ class PCRIndex extends React.Component {
       value2: '',
       value3: '',
       items: '',
+      interReferMean:'',
+      deltaCT: ''
     };
 
-    this.handleChangeOne = this.handleChangeOne.bind(this);
-    this.handleChangeTwo = this.handleChangeTwo.bind(this);
-    this.handleChangeThree = this.handleChangeThree.bind(this);
-    this.handleSubmit = this.handleSubmit.bind(this);
   }
 
-  handleChangeOne(event) {
+  handleChangeOne = (event) => {
     this.setState({value1: event.target.value});
   }
 
-  handleChangeTwo(event) {
+  handleChangeTwo = (event) => {
     this.setState({value2: event.target.value});
   }
 
-  handleChangeThree(event) {
+  handleChangeThree = (event) => {
     this.setState({value3: event.target.value});
   }
 
-  handleSubmit() {
+  handleChangeInterReferMean = (event) => {
+    this.setState({interReferMean: event.target.value})
+  }
+
+  handleSubmit = () => {
     const url = '/api/update/';
     let value1 = this.state.value1;
     let value2 = this.state.value2;
     let value3 = this.state.value3;
+    let value4 = this.state.interReferMean;
 
-    pcrAPI.updateData(value1, value2, value3, url)
+    pcrAPI.updateData(value1, value2, value3, value4, url)
       .then(res => {
+        
         this.setState({
-          items: res.data.data
+          items: res.data.mean_str,
+          deltaCT: res.data.delta_CT
         })
       })
   }
 
 
   render() {
-    const { items } = this.state;
-    let arr = items.replace(/,/g, '\n')
+    const { items, deltaCT } = this.state;
+    let arr = items.replace(/,/g, '\n');
+    let delta = deltaCT.replace(/,/g, '\n');
+
     return (
       <Container>
         <Form>
@@ -82,13 +89,27 @@ class PCRIndex extends React.Component {
                 <Input style={{'height': '448px'}} type="textarea" name="text" onChange={this.handleChangeThree} />
               </FormGroup>
             </Col>
-          <Col md={1}>
+
+            <Col md={2}>
               <FormGroup>
                 <Label>Mean</Label>
-                <textarea style={{'height': '448px'}} value={arr}></textarea>
+                <textarea className="form-control" style={{'height': '448px'}} value={arr}></textarea>
               </FormGroup>
             </Col>
 
+            <Col md={2}>
+              <FormGroup>
+                <Label> Inter refer mean</Label>
+                <Input style={{'height': '448px'}} type="textarea" name="text" value={this.state.interReferMean} onChange={this.handleChangeInterReferMean} />
+              </FormGroup>
+            </Col>
+
+            <Col md={2}>
+              <FormGroup>
+                <Label> ΔCT </Label>
+                <textarea className="form-control" style={{'height': '448px'}} value={delta}></textarea>
+              </FormGroup>
+            </Col>
           </Row>
           <Button onClick={this.handleSubmit}>Submit</Button>
         </Form>

@@ -10,20 +10,30 @@ class UpdateData(APIView):
     authentication_classes = (SessionAuthentication, )
 
     def post(self, request):
-        value1 = request.data['value1'].split('\n')
 
-        value2 = request.data['value2'].split('\n')
+        value1 = request.data['value1'].strip().split('\n')
+        value2 = request.data['value2'].strip().split('\n')
+        value3 = request.data['value3'].strip().split('\n')
+        value4 = request.data['value4']
 
-        value3 = request.data['value3'].split('\n')
+        mean = self.calculate_mean(value1, value2, value3)
 
-        total = self.calculate_mean(value1, value2, value3)
+        mean_str = ','.join(str(i) for i in mean) 
+ 
+        result = {}
+        result['mean_str'] = mean_str
+        result['delta_CT'] = ''
 
-        return Response({'data': total})
+        if value4:
+            value4 = value4.strip().split('\n')
+            value4 = list(map(eval, value1))
+            delta_ct = np.subtract(mean, value4)
+            delta = ','.join(str(i) for i in delta_ct) 
+            result['delta_CT'] = delta
+
+        return Response(result)
 
     def calculate_mean(self, value1, value2, value3):
-        value1.remove('')
-        value2.remove('')
-        value3.remove('')
 
         col1 = list(map(eval, value1))
         col2 = list(map(eval, value2))
@@ -36,6 +46,4 @@ class UpdateData(APIView):
 
         mean = np.mean(value, axis=0)
 
-        mean_str = ','.join(str(i) for i in mean) 
-
-        return mean_str
+        return mean
