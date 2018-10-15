@@ -31,14 +31,18 @@ ALLOWED_HOSTS = ['*']
 # Application definition
 
 INSTALLED_APPS = [
-    'django.contrib.admin',
+    # 'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
 
+    'webpack_loader',
+    'rest_framework',
+
     'home',
+    'api',
 ]
 
 MIDDLEWARE = [
@@ -120,3 +124,17 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/2.1/howto/static-files/
 
 STATIC_URL = '/static/'
+
+STATICFILES_DIRS = (
+     # Put strings here, like "/home/html/static" or "C:/www/django/static".
+     # Always use forward slashes, even on Windows.
+     # Don't forget to use absolute paths, not relative paths.abs 82     '%s/static' % PROJECT_ROOT,
+     '%s/frontend/build' % BASE_DIR,
+)
+
+WEBPACK_LOADER = {
+    'DEFAULT': {
+        'BUNDLE_DIR_NAME': 'frontend/',
+        'STATS_FILE': os.path.join(BASE_DIR, 'frontend/webpack-stats.pro.json'),
+    }
+}
