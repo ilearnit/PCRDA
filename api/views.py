@@ -26,7 +26,7 @@ class UpdateData(APIView):
 
         if value4:
             value4 = value4.strip().split('\n')
-            value4 = list(map(eval, value1))
+            value4 = list(map(eval, value4))
             delta_ct = np.subtract(mean, value4)
             delta = ','.join(str(i) for i in delta_ct) 
             result['delta_CT'] = delta
