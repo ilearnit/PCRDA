@@ -21,7 +21,9 @@ class PCRIndex extends React.Component {
       value3: '',
       items: '',
       interReferMean:'',
-      deltaCT: ''
+      deltaCT: '',
+      controlGroup: '',
+      deltaDeltaCT: ''
     };
 
   }
@@ -42,28 +44,33 @@ class PCRIndex extends React.Component {
     this.setState({interReferMean: event.target.value})
   }
 
+  handleControlGroup = (event) => {
+    this.setState({controlGroup: event.target.value})
+  }
+
   handleSubmit = () => {
     const url = '/api/update/';
     let value1 = this.state.value1;
     let value2 = this.state.value2;
     let value3 = this.state.value3;
     let value4 = this.state.interReferMean;
+    let value5 = this.state.controlGroup;
 
-    pcrAPI.updateData(value1, value2, value3, value4, url)
+    pcrAPI.updateData(value1, value2, value3, value4, value5, url)
       .then(res => {
-        
         this.setState({
           items: res.data.mean_str,
-          deltaCT: res.data.delta_CT
+          deltaCT: res.data.delta_CT,
+          deltaDeltaCT: res.data.delta_delta_CT
         })
       })
   }
 
-
   render() {
-    const { items, deltaCT } = this.state;
+    const { items, deltaCT , deltaDeltaCT } = this.state;
     let arr = items.replace(/,/g, '\n');
     let delta = deltaCT.replace(/,/g, '\n');
+    let deltaDelta = deltaDeltaCT.replace(/,/g, '\n');
 
     return (
       <Container>
@@ -93,7 +100,7 @@ class PCRIndex extends React.Component {
             <Col md={2}>
               <FormGroup>
                 <Label>Mean</Label>
-                <textarea className="form-control" style={{'height': '448px'}} value={arr}></textarea>
+                <textarea name='text' className="form-control" style={{'height': '448px','width': '100%'}} value={arr}></textarea>
               </FormGroup>
             </Col>
 
@@ -107,9 +114,25 @@ class PCRIndex extends React.Component {
             <Col md={2}>
               <FormGroup>
                 <Label> ΔCT </Label>
-                <textarea className="form-control" style={{'height': '448px'}} value={delta}></textarea>
+                <textarea name='text' className="form-control" style={{'height': '448px','width': '100%'}} value={delta}></textarea>
               </FormGroup>
             </Col>
+
+            <Col md={1}>
+              <FormGroup>
+                <Label> CG ΔCT </Label>
+                <textarea className="form-control" style={{'height': '448px'}} value={this.state.controlGroup} onChange={this.handleControlGroup}></textarea>
+              </FormGroup>
+            </Col>
+
+            <Col md={2}>
+              <FormGroup>
+                <Label> ΔΔCT </Label>
+                <textarea className="form-control" style={{'height': '448px'}} value={deltaDelta}></textarea>
+              </FormGroup>
+            </Col>
+
+
           </Row>
           <Button onClick={this.handleSubmit}>Submit</Button>
         </Form>

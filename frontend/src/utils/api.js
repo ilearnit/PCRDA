@@ -13,12 +13,13 @@ class PcrAPI {
     return this;
   }
   
-  updateData(value1, value2, value3, value4, updateLink) {
+  updateData(value1, value2, value3, value4, value5, updateLink) {
     const params = {
       value1: value1,
       value2: value2,
       value3: value3,
-      value4: value4
+      value4: value4,
+      value5: value5
     }
 
     return this.req.post(updateLink, params)
