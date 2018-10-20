@@ -38,7 +38,7 @@ class UpdateData(APIView):
             value5 = list(map(eval, value5))
             delta_mean = np.mean(value5)
 
-            delta_delta_CT = ','.join(str(i - delta_mean) for i in delta_ct)
+            delta_delta_CT = ','.join(str(2 ** -(i - delta_mean)) for i in delta_ct)
 
             result['delta_delta_CT'] = delta_delta_CT
 
