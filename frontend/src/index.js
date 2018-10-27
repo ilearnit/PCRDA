@@ -48,6 +48,27 @@ class PCRIndex extends React.Component {
     this.setState({controlGroup: event.target.value})
   }
 
+  onCopyDeltaCT = () => {
+    this.setState({
+      controlGroup: this.state.deltaCT,
+    })
+  }
+
+  onCopyMean = () => {
+    this.setState({
+      interReferMean: this.state.items, 
+    })
+  }
+
+  onClear = () => {
+    this.setState({
+      value1: '',
+      value2: '',
+      value3: '',
+      items: ''
+    })
+  }
+
   handleSubmit = () => {
     const url = '/api/update/';
     let value1 = this.state.value1;
@@ -59,7 +80,7 @@ class PCRIndex extends React.Component {
     pcrAPI.updateData(value1, value2, value3, value4, value5, url)
       .then(res => {
         this.setState({
-          items: res.data.mean_str,
+          items: res.data.mean_str.replace(/,/g, '\n'),
           deltaCT: res.data.delta_CT,
           deltaDeltaCT: res.data.delta_delta_CT
         })
@@ -68,7 +89,6 @@ class PCRIndex extends React.Component {
 
   render() {
     const { items, deltaCT , deltaDeltaCT } = this.state;
-    let arr = items.replace(/,/g, '\n');
     let delta = deltaCT.replace(/,/g, '\n');
     let deltaDelta = deltaDeltaCT.replace(/,/g, '\n');
 
@@ -79,28 +99,29 @@ class PCRIndex extends React.Component {
             <Col md={1}>
               <FormGroup>
                 <Label>复孔一</Label>
-                <Input style={{'height': '448px'}} type="textarea" name="text" onChange={this.handleChangeOne}/>
+                <Input style={{'height': '448px'}} type="textarea" name="text" value={this.state.value1} onChange={this.handleChangeOne}/>
               </FormGroup>
             </Col>
 
             <Col md={1}>
               <FormGroup>
                 <Label>复孔二</Label>
-                <Input style={{'height': '448px'}} type="textarea" name="text" onChange={this.handleChangeTwo}/>
+                <Input style={{'height': '448px'}} type="textarea" name="text" value={this.state.value2} onChange={this.handleChangeTwo}/>
               </FormGroup>
             </Col>
 
             <Col md={1}>
               <FormGroup>
                 <Label>复孔三</Label>
-                <Input style={{'height': '448px'}} type="textarea" name="text" onChange={this.handleChangeThree} />
+                <Input style={{'height': '448px'}} type="textarea" name="text" value={this.state.value3} onChange={this.handleChangeThree} />
               </FormGroup>
+              <Button onClick={this.onClear}> Clear 一 二 三 </Button>
             </Col>
 
             <Col md={2}>
               <FormGroup>
                 <Label>Mean</Label>
-                <textarea name='text' className="form-control" style={{'height': '448px','width': '100%'}} value={arr}></textarea>
+                <textarea name='text' className="form-control" style={{'height': '448px','width': '100%'}} value={items}></textarea>
               </FormGroup>
             </Col>
 
@@ -109,6 +130,7 @@ class PCRIndex extends React.Component {
                 <Label> Inter refer mean</Label>
                 <Input style={{'height': '448px'}} type="textarea" name="text" value={this.state.interReferMean} onChange={this.handleChangeInterReferMean} />
               </FormGroup>
+              <Button onClick={this.onCopyMean}>Copy Mean to interReferMean </Button>
             </Col>
 
             <Col md={2}>
@@ -123,6 +145,7 @@ class PCRIndex extends React.Component {
                 <Label> CG ΔCT </Label>
                 <textarea className="form-control" style={{'height': '448px'}} value={this.state.controlGroup} onChange={this.handleControlGroup}></textarea>
               </FormGroup>
+              <Button onClick={this.onCopyDeltaCT}> Copy ΔCT to CG ΔCT</Button> 
             </Col>
 
             <Col md={2}>
