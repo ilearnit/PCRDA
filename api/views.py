@@ -4,6 +4,7 @@ from rest_framework.views import APIView
 from rest_framework import status
 
 import numpy as np
+import re
 
 
 class UpdateData(APIView):
@@ -11,13 +12,11 @@ class UpdateData(APIView):
 
     def post(self, request):
 
-        value1 = request.data['value1'].strip().split('\n')
-        value2 = request.data['value2'].strip().split('\n')
-        value3 = request.data['value3'].strip().split('\n')
+        value = request.data['value']
         value4 = request.data['value4']
         value5 = request.data['value5']
 
-        mean = self.calculate_mean(value1, value2, value3)
+        mean = self.calculate_mean(value)
 
         mean_str = ','.join(str(i) for i in mean)
 
@@ -25,6 +24,7 @@ class UpdateData(APIView):
         result['mean_str'] = mean_str
         result['delta_CT'] = ''
         result['delta_delta_CT'] = ''
+        result['result'] = ''
 
         if value4:
             value4 = value4.strip().split('\n')
@@ -38,23 +38,22 @@ class UpdateData(APIView):
             value5 = list(map(eval, value5))
             delta_mean = np.mean(value5)
 
-            delta_delta_CT = ','.join(str(2 ** -(i - delta_mean)) for i in delta_ct)
+            delta_delta_CT = ','.join(str(i - delta_mean) for i in delta_ct)
+            last_result = ','.join(str(2 ** -(i - delta_mean)) for i in delta_ct)
 
             result['delta_delta_CT'] = delta_delta_CT
+            result['result'] = last_result
 
         return Response(result)
 
-    def calculate_mean(self, value1, value2, value3):
+    def calculate_mean(self, value):
 
-        col1 = list(map(eval, value1))
-        col2 = list(map(eval, value2))
-        col3 = list(map(eval, value3))
+        value = value.strip().split('\n')
+        total_data = []
+        for i in value:
+            mean_str = [float(e) for e in i.split('\t')]
+            total_data.append(mean_str)
 
-        value = []
-        value.append(col1)
-        value.append(col2)
-        value.append(col3)
-
-        mean = np.mean(value, axis=0)
+        mean = np.mean(total_data, axis=1)
 
         return mean
