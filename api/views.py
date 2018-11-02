@@ -13,6 +13,8 @@ class UpdateData(APIView):
     def post(self, request):
 
         value = request.data['value']
+        value4 = request.data['value4']
+        value5 = request.data['value5']
 
         mean = self.calculate_mean(value)
 
@@ -20,24 +22,27 @@ class UpdateData(APIView):
 
         result = {}
         result['mean_str'] = mean_str
-        # result['delta_CT'] = ''
-        # result['delta_delta_CT'] = ''
+        result['delta_CT'] = ''
+        result['delta_delta_CT'] = ''
+        result['result'] = ''
 
-        # if value4:
-        #     value4 = value4.strip().split('\n')
-        #     value4 = list(map(eval, value4))
-        #     delta_ct = np.subtract(mean, value4)
-        #     delta = ','.join(str(i) for i in delta_ct)
-        #     result['delta_CT'] = delta
+        if value4:
+            value4 = value4.strip().split('\n')
+            value4 = list(map(eval, value4))
+            delta_ct = np.subtract(mean, value4)
+            delta = ','.join(str(i) for i in delta_ct)
+            result['delta_CT'] = delta
 
-        # if value5:
-        #     value5 = value5.strip().split('\n')
-        #     value5 = list(map(eval, value5))
-        #     delta_mean = np.mean(value5)
+        if value5:
+            value5 = value5.strip().split('\n')
+            value5 = list(map(eval, value5))
+            delta_mean = np.mean(value5)
 
-        #     delta_delta_CT = ','.join(str(2 ** -(i - delta_mean)) for i in delta_ct)
+            delta_delta_CT = ','.join(str(i - delta_mean) for i in delta_ct)
+            last_result = ','.join(str(2 ** -(i - delta_mean)) for i in delta_ct)
 
-        #     result['delta_delta_CT'] = delta_delta_CT
+            result['delta_delta_CT'] = delta_delta_CT
+            result['result'] = last_result
 
         return Response(result)
 
