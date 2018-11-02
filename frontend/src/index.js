@@ -33,11 +33,11 @@ class PCRIndex extends React.Component {
   }
 
   handleChangeInterReferMean = (event) => {
-    this.setState({interReferMean: event.target.value})
+    this.setState({interReferMean: event.target.value});
   }
 
   handleControlGroup = (event) => {
-    this.setState({controlGroup: event.target.value})
+    this.setState({controlGroup: event.target.value});
   }
 
   handleSubmit = () => {
@@ -53,8 +53,8 @@ class PCRIndex extends React.Component {
           deltaCT: res.data.delta_CT,
           deltaDeltaCT: res.data.delta_delta_CT,
           lastResult: res.data.result,
-        })
-      })
+        });
+      });
   }
 
   render() {
@@ -128,4 +128,4 @@ class PCRIndex extends React.Component {
 ReactDOM.render(
   <PCRIndex />,
   document.getElementById('root')
-)
+);

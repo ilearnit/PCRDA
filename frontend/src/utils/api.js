@@ -1,6 +1,4 @@
 var axios = require('axios');
-var FormData = require('form-data');
-var fs = require('fs');
 
 class PcrAPI {
 
@@ -18,9 +16,9 @@ class PcrAPI {
       value: value,
       value4: value4,
       value5: value5
-    }
+    };
 
-    return this.req.post(updateLink, params)
+    return this.req.post(updateLink, params);
   }
 }
 
