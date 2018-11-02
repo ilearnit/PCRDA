@@ -114,8 +114,10 @@ class PCRIndex extends React.Component {
               </FormGroup>
             </Col>
 
+            <Col md={1}>
+              <Button onClick={this.handleSubmit}>Submit</Button>
+            </Col>
           </Row>
-          <Button onClick={this.handleSubmit}>Submit</Button>
         </Form>
       </Container>
     );
