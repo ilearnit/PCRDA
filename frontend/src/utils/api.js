@@ -20,6 +20,12 @@ class PcrAPI {
 
     return this.req.post(updateLink, params);
   }
+
+  uploadFile(file) {
+    const uploadURL = '/api/read/';
+    alert(file.content)
+    return this.req.post(uploadURL, file);
+  }
 }
 
 export { PcrAPI };
