@@ -26,7 +26,7 @@ export default class Header extends React.Component {
   }
   render() {
     return (
-      <div>
+      <div className="sticky-top">
         <Navbar color="light" light expand="md">
           <NavbarBrand href="/">PCRDA</NavbarBrand>
           <NavbarToggler onClick={this.toggle} />

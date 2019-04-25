@@ -1,7 +1,9 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { PcrAPI } from './utils/api';
-import { Table, Form, FormGroup, Label, Input, Container, Row, Col, FormText } from 'reactstrap';
+import { Table, Form, FormGroup, 
+         Label, Input, Container,
+         Row, Col, FormText, Button } from 'reactstrap';
 
 import cookie from 'react-cookies';
 import { FilePond, registerPlugin } from "react-filepond";
@@ -15,8 +17,6 @@ let xcsrfHeaders = cookie.load('sfcsrftoken');
 pcrAPI.init({ xcsrfHeaders });
 
 
-
-
 class PCRIndex extends React.Component {
 
   constructor(props) {
@@ -25,10 +25,24 @@ class PCRIndex extends React.Component {
       value: [],
       position: [],
       files: [],
-      fileContent:''
+      fileContent:'',
+      page: 0
     };
   }
-  
+
+  onChangePageNum = (e, num) => {
+    e.preventDefault();
+    let page = this.state.page;
+
+    if (num == 1) {
+      page = page + 12;
+    } else {
+      page = page - 12;
+    }
+    this.setState({
+      page: page
+    })
+  } 
 
   render() {
     let onUploadFile = {
@@ -38,8 +52,7 @@ class PCRIndex extends React.Component {
         onload:(res) => {
           let data = JSON.parse(res);
           this.setState({
-            value: data.data.Cp,
-            position: data.data.Pos
+            value: data.data,
           });
         },
       },
@@ -54,6 +67,8 @@ class PCRIndex extends React.Component {
       }
     };
 
+    let page = this.state.page;
+
     return (
       <div>
         <Header />
@@ -61,26 +76,36 @@ class PCRIndex extends React.Component {
           <Row>
             <Col sm={3}>
             <Label className='d-flex justify-content-center'>Source Data</Label>
-            <Table bordered striped responsive className="mb-0">
+            <Table className="mb-0">
               <thead>
                 <tr>
-                  <th width="45%">Pos</th>
-                  <th width="55%">Cp</th>
+                  <th>Pos</th>
+                  <th>Cp</th>
                 </tr>
               </thead>
             </Table>
             <Table bordered striped hover responsive>
               <tbody>
-              {this.state.value.slice(0, 12).map((item, index) => {
+              {this.state.value.slice(page, page+12).map((item) => {
                 return (
-                  <tr key={index}>
-                    <th scope="row">{this.state.position[index]}</th>
-                    <th>{item}</th>
+                  <tr key={item.pos}>
+                    <th scope="row">{item.pos}</th>
+                    <th>{item.cp}</th>
                   </tr>
                 )}) 
               }
               </tbody>
             </Table>
+            {this.state.value.length >0 &&
+              <div className="d-flex justify-content-between">
+              {page > 0 &&
+                <Button outline color="warning" onClick={e => this.onChangePageNum(e, -1)}>Previous</Button>
+              }
+              {page < 372 &&
+                <Button outline color="success" onClick={e => this.onChangePageNum(e, 1)}>Next</Button>
+              }
+              </div>
+            }
             <FilePond server={onUploadFile}/>
             </Col>
           </Row>
