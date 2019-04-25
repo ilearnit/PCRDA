@@ -7,39 +7,31 @@ import { Table, Form, FormGroup,
 
 import cookie from 'react-cookies';
 import { FilePond, registerPlugin } from "react-filepond";
-
 import "filepond/dist/filepond.min.css";
-
-import Header from './navs';
-import ShowFile from './show_file';
-import Operation from './operation';
-
 
 let pcrAPI = new PcrAPI();
 let xcsrfHeaders = cookie.load('sfcsrftoken');
 pcrAPI.init({ xcsrfHeaders });
 
 
-class PCRIndex extends React.Component {
+class ShowFile extends React.Component {
+
+  constructor(props) {
+    super(props);
+    this.state = {
+      value: [],
+      files: [],
+      page: 0
+    };
+  }
+
 
   render() {
     return (
-      <div>
-        <Header />
-        <Container>
-          <Row>
-            <ShowFile />
-            <ShowFile />
-            <Operation />
-          </Row>
-        </Container>
-      </div>
+      <Col sm={6}>
+      </Col>
     );
   }
 }
 
-
-ReactDOM.render(
-  <PCRIndex />,
-  document.getElementById('root')
-);
+export default ShowFile;
