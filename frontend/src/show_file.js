@@ -65,7 +65,7 @@ class ShowFile extends React.Component {
     let page = this.state.page;
 
     return (
-      <Col sm={3}>
+      <Col sm={2}>
         <Label className='d-flex justify-content-center'>Source Data</Label>
         <Table className="mb-0">
           <thead>

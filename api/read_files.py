@@ -25,7 +25,15 @@ class ReadFiles(APIView):
 
         data = pd.read_csv(file_obj, sep="\t")
         data = data.fillna('-1')
-        return Response({'data': data})
+
+        result = []
+        for pos, cp in zip(data.Pos, data.Cp):
+            tmp = {}
+            tmp['pos'] = pos
+            tmp['cp'] = cp
+            result.append(tmp)
+
+        return Response({'data': result})
 
     def delete(self, request):
         return Response({'success': True})
