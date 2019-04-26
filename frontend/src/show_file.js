@@ -21,7 +21,8 @@ class ShowFile extends React.Component {
     this.state = {
       value: [],
       files: [],
-      page: 0
+      page: 0,
+      key: '' 
     };
   }
 
@@ -48,7 +49,9 @@ class ShowFile extends React.Component {
           let data = JSON.parse(res);
           this.setState({
             value: data.data,
+            key: data.key
           });
+          this.props.setSourceKey(data.key);
         },
       },
       revert: {

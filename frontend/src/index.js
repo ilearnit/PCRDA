@@ -21,15 +21,36 @@ pcrAPI.init({ xcsrfHeaders });
 
 
 class PCRIndex extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      sourceKey1: '',
+      sourceKey2: ''
+    };
+  }
+
+  setSourceKey1 = (key) => {
+    this.setState({
+      sourceKey1: key
+    })
+  }
+
+  setSourceKey2 = (key) => {
+    this.setState({
+      sourceKey2: key
+    })
+  }
 
   render() {
+    console.log(this.state.sourceKey1)
+    console.log(this.state.sourceKey2)
     return (
       <div>
         <Header />
         <Container>
           <Row>
-            <ShowFile />
-            <ShowFile />
+            <ShowFile setSourceKey={this.setSourceKey1} />
+            <ShowFile setSourceKey={this.setSourceKey2}/>
             <Operation />
           </Row>
         </Container>
