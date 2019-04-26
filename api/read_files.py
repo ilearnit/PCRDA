@@ -1,4 +1,9 @@
 import os
+import hashlib
+import time
+
+from django.core.cache import cache
+
 from rest_framework.authentication import SessionAuthentication
 from rest_framework.response import Response
 from rest_framework.views import APIView
@@ -33,10 +38,20 @@ class ReadFiles(APIView):
             tmp['cp'] = cp
             result.append(tmp)
 
-        return Response({'data': result})
+        timestamp = str(time.time())
+        filename = (file_obj.name + timestamp).encode('utf-8')
+        filename_md5 = hashlib.md5(filename).hexdigest()
+        cache_key = 'file_%s' % filename_md5
+        file_content = cache.get(cache_key)
+        if file_content is None:
+            # otherwise, read file from database and update cache
+            cache.set(cache_key, result, 60)
+
+        return Response({'data': result, 'key': cache_key})
 
     def delete(self, request):
         return Response({'success': True})
+
 
 def api_error(code, msg):
     err_resp = {'error_msg': msg}

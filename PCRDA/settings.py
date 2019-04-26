@@ -133,9 +133,17 @@ STATICFILES_DIRS = (
      '%s/frontend/build' % BASE_DIR,
 )
 
+CACHES = {
+    'default': {
+        'BACKEND': 'django.core.cache.backends.filebased.FileBasedCache',
+        'LOCATION': '/var/tmp/django_cache',
+    }
+}
+
 WEBPACK_LOADER = {
     'DEFAULT': {
         'BUNDLE_DIR_NAME': 'frontend/',
         'STATS_FILE': os.path.join(BASE_DIR, 'frontend/webpack-stats.pro.json'),
     }
 }
+
