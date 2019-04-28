@@ -4,6 +4,9 @@ import { PcrAPI } from './utils/api';
 import { Label, Container, Row, Col, Button } from 'reactstrap';
 import cookie from 'react-cookies';
 
+import { toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+
 import Header from './navs';
 import ShowFile from './show_file';
 import Operation from './operation';
@@ -14,6 +17,7 @@ let pcrAPI = new PcrAPI();
 let xcsrfHeaders = cookie.load('sfcsrftoken');
 pcrAPI.init({ xcsrfHeaders });
 
+toast.configure();
 
 class PCRIndex extends React.Component {
   constructor(props) {
@@ -89,6 +93,12 @@ class PCRIndex extends React.Component {
     let sampleDoubleHole = this.state.sampleDoubleHole;
     let internalReferenceDoubleHole = this.state.internalReferenceDoubleHole;
     let referenceGroupDoubleHole = this.state.referenceGroupDoubleHole;
+
+    if (!sourceKey1 || !sourceKey2 || sampleDoubleHole.length !=2 || internalReferenceDoubleHole.length !=2 || referenceGroupDoubleHole !=2) {
+      toast("Please check if the source file exists or if the duplicate hole is selected correctly.", {position: toast.POSITION.TOP_CENTER});
+      return;
+    }
+
     pcrAPI.dataAnalysis(sourceKey1, sourceKey2, sampleDoubleHole, internalReferenceDoubleHole, referenceGroupDoubleHole).then(res => {
       this.setState({
         result: res.data.result,  
@@ -113,9 +123,11 @@ class PCRIndex extends React.Component {
         <Header />
         <Container>
           <Row>
-            <ShowFile label={'Source Data One'} setSourceKey={this.setSourceKey1} />
-            <ShowFile label={'Source Data Two'} setSourceKey={this.setSourceKey2} />
+            <ShowFile label={'Source File One'} setSourceKey={this.setSourceKey1} />
+            <ShowFile label={'Source File Two'} setSourceKey={this.setSourceKey2} />
             <Col>
+              <br />
+              <br />
               <Label>{'Input sample double hole start and end(Tips: Choose from source data one): '}</Label>
               <Row>
                 <Operation label={'Start'} handleSelected={this.setSampleDoubleHoleStart} />
@@ -134,7 +146,9 @@ class PCRIndex extends React.Component {
                 <Operation label={'Start'} handleSelected={this.setReferenceGroupDoubleHoleStart} />
                 <Operation label={'End'} handleSelected={this.setReferenceGroupDoubleHoleEnd} />
               </Row>
-              <Button onClick={this.handleSubmit}>Submit</Button>
+
+              <br />
+              <Button onClick={this.handleSubmit} className={"float-right"}>Submit</Button>
             </Col>
           </Row>
         </Container>
