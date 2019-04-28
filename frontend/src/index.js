@@ -25,7 +25,13 @@ class PCRIndex extends React.Component {
     super(props);
     this.state = {
       sourceKey1: '',
-      sourceKey2: ''
+      sourceKey2: '',
+      sampleDoubleHoleStart: '',
+      sampleDoubleHoleEnd: '',
+      internalReferenceDoubleHoleStart: '',
+      internalReferenceDoubleHoleEnd: '',
+      referenceGroupDoubleHoleStart: '', 
+      referenceGroupDoubleHoleEnd: '', 
     };
   }
 
@@ -41,17 +47,70 @@ class PCRIndex extends React.Component {
     })
   }
 
+  setSampleDoubleHoleStart = (selectedOption) => {
+    this.setState({
+      sampleDoubleHoleStart: selectedOption.value
+    })
+  }
+
+  setSampleDoubleHoleEnd = (selectedOption) => {
+    this.setState({
+      sampleDoubleHoleStart: selectedOption.value
+    })
+  }
+
+  setInternalReferenceDoubleHoleStart = (selectedOption) => {
+    this.setState({
+      internalReferenceDoubleHoleStart: selectedOption.value  
+    })
+  } 
+
+  setInternalReferenceDoubleHoleEnd = (selectedOption) => {
+    this.setState({
+      internalReferenceDoubleHoleEnd: selectedOption.value  
+    })
+  } 
+
+  setReferenceGroupDoubleHoleStart = (selectedOption) => {
+    this.setState({
+      referenceGroupDoubleHoleStart: selectedOption.value  
+    }) 
+  } 
+
+  setReferenceGroupDoubleHoleEnd = (selectedOption) => {
+    this.setState({
+      referenceGroupDoubleHoleEnd: selectedOption.value  
+    }) 
+  } 
+
   render() {
-    console.log(this.state.sourceKey1)
-    console.log(this.state.sourceKey2)
     return (
       <div>
         <Header />
         <Container>
           <Row>
-            <ShowFile setSourceKey={this.setSourceKey1} />
-            <ShowFile setSourceKey={this.setSourceKey2}/>
-            <Operation />
+            <ShowFile label={'Source Data One'} setSourceKey={this.setSourceKey1} />
+            <ShowFile label={'Source Data Two'} setSourceKey={this.setSourceKey2} />
+            <Col>
+              <Label>{'Input sample double hole start and end(Tips: Choose from source data one): '}</Label>
+              <Row>
+                <Operation label={'Start'} handleSelected={this.setSampleDoubleHoleStart} />
+                <Operation label={'End'} handleSelected={this.setSampleDoubleHoleEnd} />
+              </Row>
+              <br />
+              <Label>{'Input internal reference double hole start and end(Tips: Choose from source data two): '}</Label>
+              <Row>
+                <Operation label={'Start'} handleSelected={this.setInternalReferenceDoubleHoleStart} />
+                <Operation label={'End'} handleSelected={this.setInternalReferenceDoubleHoleEnd} />
+              </Row>
+
+              <br />
+              <Label>{'Input reference group double hole start and end(Tips: Choose from source data two): '}</Label>
+              <Row>
+                <Operation label={'Start'} handleSelected={this.setReferenceGroupDoubleHoleStart} />
+                <Operation label={'End'} handleSelected={this.setReferenceGroupDoubleHoleEnd} />
+              </Row>
+            </Col>
           </Row>
         </Container>
       </div>

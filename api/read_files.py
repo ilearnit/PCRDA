@@ -32,11 +32,20 @@ class ReadFiles(APIView):
         data = data.fillna('-1')
 
         result = []
+        choice = []
+        i = 0
         for pos, cp in zip(data.Pos, data.Cp):
             tmp = {}
             tmp['pos'] = pos
             tmp['cp'] = cp
             result.append(tmp)
+
+            choice_obj = {}
+            choice_obj['value'] = i
+            choice_obj['label'] = pos
+            i = i + 1
+            choice.append(choice_obj)
+        print(choice)
 
         timestamp = str(time.time())
         filename = (file_obj.name + timestamp).encode('utf-8')

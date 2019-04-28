@@ -1,110 +1,37 @@
 import React from 'react';
-import ReactDOM from 'react-dom';
-import { PcrAPI } from './utils/api';
-import { Table, Form, FormGroup, 
-         Label, Input, Container,
-         Row, Col, FormText, Button } from 'reactstrap';
-
-import cookie from 'react-cookies';
-import "filepond/dist/filepond.min.css";
-
-let pcrAPI = new PcrAPI();
-let xcsrfHeaders = cookie.load('sfcsrftoken');
-pcrAPI.init({ xcsrfHeaders });
+import { Label, Col } from 'reactstrap';
+import Select from 'react-select';
+import { KEY_VALUE } from './constant';
 
 
-class ShowFile extends React.Component {
+class SelectEditor extends React.Component {
 
   constructor(props) {
     super(props);
     this.state = {
+      selectedOption: null,
     };
   }
 
+  handleChange = (selectedOption) => {
+    // Object { value: 0, label: 'A1'}
+    this.setState({ selectedOption });
+    this.props.handleSelected(selectedOption);
+  }
 
   render() {
+    const { selectedOption } = this.state;
     return (
-      <Col sm={8}>
-        <Form inline>
-          <FormGroup className="mb-2 mr-sm-2 mb-sm-0">
-            <Label htmlFor="exampleStart" className="mr-sm-2">Start</Label>
-            <Input type="email" name="email" id="exampleStart" placeholder="A1" />
-          </FormGroup>
-          <FormGroup className="mb-2 mr-sm-2 mb-sm-0">
-            <Label htmlFor="exampleEnd" className="mr-sm-2">End</Label>
-            <Input type="password" name="password" id="exampleEnd" placeholder="A6" />
-          </FormGroup>
-          <FormGroup className="mb-2 mr-sm-2 mb-sm-0">
-            <Label htmlFor="exampleStart" className="mr-sm-2">Start</Label>
-            <Input type="email" name="email" id="exampleStart" placeholder="B1" />
-          </FormGroup>
-          <FormGroup className="mb-2 mr-sm-2 mb-sm-0">
-            <Label htmlFor="exampleEnd" className="mr-sm-2">End</Label>
-            <Input type="password" name="password" id="exampleEnd" placeholder="B6" />
-          </FormGroup>
-          <FormGroup className="mb-2 mr-sm-2 mb-sm-0">
-            <Label htmlFor="exampleStart" className="mr-sm-2">Start</Label>
-            <Input type="email" name="email" id="exampleStart" placeholder="C1" />
-          </FormGroup>
-          <FormGroup className="mb-2 mr-sm-2 mb-sm-0">
-            <Label htmlFor="exampleEnd" className="mr-sm-2">End</Label>
-            <Input type="password" name="password" id="exampleEnd" placeholder="C6" />
-          </FormGroup>
-
-          <FormGroup className="mb-2 mr-sm-2 mb-sm-0">
-            <Label htmlFor="exampleStart" className="mr-sm-2">Start</Label>
-            <Input type="email" name="email" id="exampleStart" placeholder="A1" />
-          </FormGroup>
-          <FormGroup className="mb-2 mr-sm-2 mb-sm-0">
-            <Label htmlFor="exampleEnd" className="mr-sm-2">End</Label>
-            <Input type="password" name="password" id="exampleEnd" placeholder="A6" />
-          </FormGroup>
-          <FormGroup className="mb-2 mr-sm-2 mb-sm-0">
-            <Label htmlFor="exampleStart" className="mr-sm-2">Start</Label>
-            <Input type="email" name="email" id="exampleStart" placeholder="B1" />
-          </FormGroup>
-          <FormGroup className="mb-2 mr-sm-2 mb-sm-0">
-            <Label htmlFor="exampleEnd" className="mr-sm-2">End</Label>
-            <Input type="password" name="password" id="exampleEnd" placeholder="B6" />
-          </FormGroup>
-          <FormGroup className="mb-2 mr-sm-2 mb-sm-0">
-            <Label htmlFor="exampleStart" className="mr-sm-2">Start</Label>
-            <Input type="email" name="email" id="exampleStart" placeholder="C1" />
-          </FormGroup>
-          <FormGroup className="mb-2 mr-sm-2 mb-sm-0">
-            <Label htmlFor="exampleEnd" className="mr-sm-2">End</Label>
-            <Input type="password" name="password" id="exampleEnd" placeholder="C6" />
-          </FormGroup>
-
-          <FormGroup className="mb-2 mr-sm-2 mb-sm-0">
-            <Label htmlFor="exampleStart" className="mr-sm-2">Start</Label>
-            <Input type="email" name="email" id="exampleStart" placeholder="A1" />
-          </FormGroup>
-          <FormGroup className="mb-2 mr-sm-2 mb-sm-0">
-            <Label htmlFor="exampleEnd" className="mr-sm-2">End</Label>
-            <Input type="password" name="password" id="exampleEnd" placeholder="A6" />
-          </FormGroup>
-          <FormGroup className="mb-2 mr-sm-2 mb-sm-0">
-            <Label htmlFor="exampleStart" className="mr-sm-2">Start</Label>
-            <Input type="email" name="email" id="exampleStart" placeholder="B1" />
-          </FormGroup>
-          <FormGroup className="mb-2 mr-sm-2 mb-sm-0">
-            <Label htmlFor="exampleEnd" className="mr-sm-2">End</Label>
-            <Input type="password" name="password" id="exampleEnd" placeholder="B6" />
-          </FormGroup>
-          <FormGroup className="mb-2 mr-sm-2 mb-sm-0">
-            <Label htmlFor="exampleStart" className="mr-sm-2">Start</Label>
-            <Input type="email" name="email" id="exampleStart" placeholder="C1" />
-          </FormGroup>
-          <FormGroup className="mb-2 mr-sm-2 mb-sm-0">
-            <Label htmlFor="exampleEnd" className="mr-sm-2">End</Label>
-            <Input type="password" name="password" id="exampleEnd" placeholder="C6" />
-          </FormGroup>
-
-        </Form>
+      <Col sm={6}>
+        <Label>{this.props.label}</Label>
+        <Select
+          value={selectedOption}
+          onChange={this.handleChange}
+          options={KEY_VALUE}
+        />
       </Col>
     );
   }
 }
 
-export default ShowFile;
+export default SelectEditor;
