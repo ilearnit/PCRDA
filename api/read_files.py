@@ -28,7 +28,7 @@ class ReadFiles(APIView):
             error_msg = 'Permission denied.'
             return api_error(status.HTTP_403_FORBIDDEN, error_msg)
 
-        data = pd.read_csv(file_obj, sep="\t")
+        data = pd.read_csv(file_obj, skiprows=1, sep="\t")
         data = data.fillna('-1')
 
         result = []
