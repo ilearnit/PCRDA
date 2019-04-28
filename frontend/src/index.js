@@ -7,6 +7,7 @@ import cookie from 'react-cookies';
 import Header from './navs';
 import ShowFile from './show_file';
 import Operation from './operation';
+import ShowResult from './show_result';
 
 
 let pcrAPI = new PcrAPI();
@@ -20,9 +21,11 @@ class PCRIndex extends React.Component {
     this.state = {
       sourceKey1: '',
       sourceKey2: '',
-      sampleDoubleHole: [],
-      internalReferenceDoubleHole: [],
-      referenceGroupDoubleHole: [], 
+      sampleDoubleHole: [0, 0],
+      internalReferenceDoubleHole: [0, 0],
+      referenceGroupDoubleHole: [0, 0], 
+      result: [],
+      showResult: false,
     };
   }
 
@@ -39,42 +42,42 @@ class PCRIndex extends React.Component {
   }
 
   setSampleDoubleHoleStart = (selectedOption) => {
-    this.state.sampleDoubleHole.unshift(selectedOption.value);
+    this.state.sampleDoubleHole[0] = selectedOption.value;
     this.setState({
       sampleDoubleHole: this.state.sampleDoubleHole 
     });
   }
 
   setSampleDoubleHoleEnd = (selectedOption) => {
-    this.state.sampleDoubleHole.push(selectedOption.value);
+    this.state.sampleDoubleHole[1] = selectedOption.value;
     this.setState({
       sampleDoubleHoleStart: this.state.sampleDoubleHole
     });
   }
 
   setInternalReferenceDoubleHoleStart = (selectedOption) => {
-    this.state.internalReferenceDoubleHole.unshift(selectedOption.value);
+    this.state.internalReferenceDoubleHole[0] = selectedOption.value;
     this.setState({
       internalReferenceDoubleHoleStart: this.state.internalReferenceDoubleHole 
     });
   } 
 
   setInternalReferenceDoubleHoleEnd = (selectedOption) => {
-    this.state.internalReferenceDoubleHole.push(selectedOption.value);
+    this.state.internalReferenceDoubleHole[1] = selectedOption.value;
     this.setState({
       internalReferenceDoubleHoleEnd: this.state.internalReferenceDoubleHole 
     });
   } 
 
   setReferenceGroupDoubleHoleStart = (selectedOption) => {
-    this.state.referenceGroupDoubleHole.unshift(selectedOption.value);
+    this.state.referenceGroupDoubleHole[0] = selectedOption.value;
     this.setState({
       referenceGroupDoubleHoleStart: this.state.referenceGroupDoubleHole
     }); 
   } 
 
   setReferenceGroupDoubleHoleEnd = (selectedOption) => {
-    this.state.referenceGroupDoubleHole.push(selectedOption.value);
+    this.state.referenceGroupDoubleHole[1] = selectedOption.value;
     this.setState({
       referenceGroupDoubleHoleEnd: this.state.referenceGroupDoubleHole
     }); 
@@ -87,11 +90,24 @@ class PCRIndex extends React.Component {
     let internalReferenceDoubleHole = this.state.internalReferenceDoubleHole;
     let referenceGroupDoubleHole = this.state.referenceGroupDoubleHole;
     pcrAPI.dataAnalysis(sourceKey1, sourceKey2, sampleDoubleHole, internalReferenceDoubleHole, referenceGroupDoubleHole).then(res => {
-      console.log(res.data)  
+      this.setState({
+        result: res.data.result,  
+        showResult: true,
+        sampleDoubleHole: '',
+        internalReferenceDoubleHole: '',
+        referenceGroupDoubleHole: ''
+      })
+    })
+  }
+
+  toggleDialog = () => {
+    this.setState({
+      showResult: false  
     })
   }
 
   render() {
+    let showResult = this.state.showResult;
     return (
       <div>
         <Header />
@@ -122,6 +138,9 @@ class PCRIndex extends React.Component {
             </Col>
           </Row>
         </Container>
+        {showResult &&
+          <ShowResult result={this.state.result} toggle={this.toggleDialog} />
+        }
       </div>
     );
   }

@@ -45,7 +45,7 @@ class ReadFiles(APIView):
         file_content = cache.get(cache_key)
         if file_content is None:
             # otherwise, read file from database and update cache
-            cache.set(cache_key, data, 60 * 60)
+            cache.set(cache_key, data, 1 * 24 * 60 * 60)
 
         return Response({'data': result, 'key': cache_key})
 
