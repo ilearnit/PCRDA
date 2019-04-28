@@ -52,6 +52,7 @@ class ShowFile extends React.Component {
             value: [],
             position: []
           });
+          this.props.setSourceKey('');
         })
       }
     };

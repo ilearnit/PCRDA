@@ -94,7 +94,7 @@ class PCRIndex extends React.Component {
     let internalReferenceDoubleHole = this.state.internalReferenceDoubleHole;
     let referenceGroupDoubleHole = this.state.referenceGroupDoubleHole;
 
-    if (!sourceKey1 || !sourceKey2 || sampleDoubleHole.length !=2 || internalReferenceDoubleHole.length !=2 || referenceGroupDoubleHole !=2) {
+    if (sourceKey1 == '' || sourceKey2 == '') {
       toast("Please check if the source file exists or if the duplicate hole is selected correctly.", {position: toast.POSITION.TOP_CENTER});
       return;
     }
@@ -103,9 +103,9 @@ class PCRIndex extends React.Component {
       this.setState({
         result: res.data.result,  
         showResult: true,
-        sampleDoubleHole: '',
-        internalReferenceDoubleHole: '',
-        referenceGroupDoubleHole: ''
+        // sampleDoubleHole: '',
+        // internalReferenceDoubleHole: '',
+        // referenceGroupDoubleHole: ''
       })
     })
   }
