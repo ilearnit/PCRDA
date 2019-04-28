@@ -1,14 +1,8 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { PcrAPI } from './utils/api';
-import { Table, Form, FormGroup, 
-         Label, Input, Container,
-         Row, Col, FormText, Button } from 'reactstrap';
-
+import { Label, Container, Row, Col } from 'reactstrap';
 import cookie from 'react-cookies';
-import { FilePond, registerPlugin } from "react-filepond";
-
-import "filepond/dist/filepond.min.css";
 
 import Header from './navs';
 import ShowFile from './show_file';
@@ -38,49 +32,49 @@ class PCRIndex extends React.Component {
   setSourceKey1 = (key) => {
     this.setState({
       sourceKey1: key
-    })
+    });
   }
 
   setSourceKey2 = (key) => {
     this.setState({
       sourceKey2: key
-    })
+    });
   }
 
   setSampleDoubleHoleStart = (selectedOption) => {
     this.setState({
       sampleDoubleHoleStart: selectedOption.value
-    })
+    });
   }
 
   setSampleDoubleHoleEnd = (selectedOption) => {
     this.setState({
       sampleDoubleHoleStart: selectedOption.value
-    })
+    });
   }
 
   setInternalReferenceDoubleHoleStart = (selectedOption) => {
     this.setState({
       internalReferenceDoubleHoleStart: selectedOption.value  
-    })
+    });
   } 
 
   setInternalReferenceDoubleHoleEnd = (selectedOption) => {
     this.setState({
       internalReferenceDoubleHoleEnd: selectedOption.value  
-    })
+    });
   } 
 
   setReferenceGroupDoubleHoleStart = (selectedOption) => {
     this.setState({
       referenceGroupDoubleHoleStart: selectedOption.value  
-    }) 
+    }); 
   } 
 
   setReferenceGroupDoubleHoleEnd = (selectedOption) => {
     this.setState({
       referenceGroupDoubleHoleEnd: selectedOption.value  
-    }) 
+    }); 
   } 
 
   render() {
