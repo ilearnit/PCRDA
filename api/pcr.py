@@ -5,9 +5,7 @@ from rest_framework.response import Response
 from rest_framework.views import APIView
 from rest_framework import status
 
-import pandas as pd
 import numpy as np
-
 
 
 class PCRDA(APIView):
@@ -31,11 +29,11 @@ class PCRDA(APIView):
 
         delta_list = []
         for i in range(len(av_one)):
-            delta = av_one[i] - av_two[i]
+            delta = av_two[i] - av_one[i]
             delta_list.append(delta)
 
         limit = refer_group_double_hole[1] - refer_group_double_hole[0]
-        delta_av_list = delta_list[:limit]
+        delta_av_list = delta_list[:limit+1]
         delta_mean = np.mean(delta_av_list)
 
         delta_delta_CT = []
@@ -46,15 +44,12 @@ class PCRDA(APIView):
         ## delta_delta_CT = [i - delta_mean for i in delta_mean]
         result = [2 ** -i for i in delta_delta_CT]
 
-        print(result)
-
-        return Response({'result': True})
-
+        return Response({'result': result})
 
     def calculate_mean(self, index_dict, hole_one):
         i = hole_one[0]
         mean = []
-        while i < hole_one[1]:
+        while i < hole_one[1] + 1:
             value_one = index_dict[i]
             value_two = index_dict[i + 24]
             value_three = index_dict[i + 48]
