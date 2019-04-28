@@ -32,20 +32,11 @@ class ReadFiles(APIView):
         data = data.fillna('-1')
 
         result = []
-        choice = []
-        i = 0
         for pos, cp in zip(data.Pos, data.Cp):
             tmp = {}
             tmp['pos'] = pos
             tmp['cp'] = cp
             result.append(tmp)
-
-            choice_obj = {}
-            choice_obj['value'] = i
-            choice_obj['label'] = pos
-            i = i + 1
-            choice.append(choice_obj)
-        print(choice)
 
         timestamp = str(time.time())
         filename = (file_obj.name + timestamp).encode('utf-8')
@@ -54,7 +45,7 @@ class ReadFiles(APIView):
         file_content = cache.get(cache_key)
         if file_content is None:
             # otherwise, read file from database and update cache
-            cache.set(cache_key, result, 60)
+            cache.set(cache_key, data, 60 * 60)
 
         return Response({'data': result, 'key': cache_key})
 
