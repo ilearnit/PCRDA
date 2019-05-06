@@ -10,5 +10,5 @@ def about(request):
     return render(request, 'about.html')
 
 
-def documentation(request):
+def help(request):
     return render(request, 'documentation.html')

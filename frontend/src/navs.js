@@ -30,6 +30,16 @@ export default class Header extends React.Component {
     window.open(url, "_blank");
   }
 
+  onAbout = () => {
+    const url = "/about/";
+    window.open(url, "_blank");
+  }
+
+  onHelp = () => {
+    const url = "/help/";
+    window.open(url, "_blank");
+  }
+
   render() {
     return (
       <div className="sticky-top">
@@ -38,6 +48,12 @@ export default class Header extends React.Component {
           <NavbarToggler onClick={this.toggle} />
           <Collapse isOpen={this.state.isOpen} navbar>
             <Nav className="ml-auto" navbar>
+              <NavItem>
+                <NavLink onClick={this.onHelp}>HELP</NavLink>
+              </NavItem>
+              <NavItem>
+                <NavLink onClick={this.onAbout}>ABOUT</NavLink>
+              </NavItem>
               <NavItem>
                 <NavLink onClick={this.onFuture}>FUTURE</NavLink>
               </NavItem>
