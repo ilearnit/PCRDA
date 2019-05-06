@@ -24,6 +24,12 @@ export default class Header extends React.Component {
       isOpen: !this.state.isOpen
     });
   }
+
+  onFuture = () => {
+    const url = "https://trello.com/b/WBpyJukp/pcrda";
+    window.open(url, "_blank");
+  }
+
   render() {
     return (
       <div className="sticky-top">
@@ -33,7 +39,7 @@ export default class Header extends React.Component {
           <Collapse isOpen={this.state.isOpen} navbar>
             <Nav className="ml-auto" navbar>
               <NavItem>
-                <NavLink href="https://trello.com/b/WBpyJukp/pcrda">FUTURE</NavLink>
+                <NavLink onClick={this.onFuture}>FUTURE</NavLink>
               </NavItem>
             </Nav>
           </Collapse>
