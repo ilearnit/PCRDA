@@ -11,4 +11,4 @@ def about(request):
 
 
 def help(request):
-    return render(request, 'documentation.html')
+    return render(request, 'help.html')
