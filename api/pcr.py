@@ -3,7 +3,6 @@ from django.core.cache import cache
 from rest_framework.authentication import SessionAuthentication
 from rest_framework.response import Response
 from rest_framework.views import APIView
-from rest_framework import status
 
 import numpy as np
 
@@ -41,7 +40,7 @@ class PCRDA(APIView):
             delta_deleta_ct = i - delta_mean
             delta_delta_CT.append(delta_deleta_ct)
 
-        ## delta_delta_CT = [i - delta_mean for i in delta_mean]
+        # delta_delta_CT = [i - delta_mean for i in delta_mean]
         result = [2 ** -i for i in delta_delta_CT]
 
         return Response({'result': result})
