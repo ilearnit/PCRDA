@@ -7,7 +7,7 @@ from rest_framework.views import APIView
 import numpy as np
 
 
-class PCRDA(APIView):
+class CalculateDeltaDeltaCt (APIView):
     authentication_classes = (SessionAuthentication, )
 
     def post(self, request):
