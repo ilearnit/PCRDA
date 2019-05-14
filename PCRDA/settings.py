@@ -23,8 +23,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SECRET_KEY = 'tw*1)=2g!g3oye01=q!v8zp8o+5vm&g%1aq9*9=wefk4nh8qxl'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-# DEBUG = True
-DEBUG = False
+DEBUG = True
 
 ALLOWED_HOSTS = ['*']
 
@@ -131,6 +130,7 @@ STATICFILES_DIRS = (
      # Put strings here, like "/home/html/static" or "C:/www/django/static".
      # Always use forward slashes, even on Windows.
      # Don't forget to use absolute paths, not relative paths.abs 82     '%s/static' % PROJECT_ROOT,
+     '%s/media/' % BASE_DIR,
      '%s/frontend/build' % BASE_DIR,
 )
 

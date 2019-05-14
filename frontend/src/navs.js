@@ -25,26 +25,6 @@ export default class Header extends React.Component {
     });
   }
 
-  onFuture = () => {
-    const url = 'https://trello.com/b/WBpyJukp/pcrda';
-    window.open(url, '_blank');
-  }
-
-  onAbout = () => {
-    const url = '/about/';
-    window.open(url, '_blank');
-  }
-
-  onHelp = () => {
-    const url = '/help/';
-    window.open(url, '_blank');
-  }
-
-  onGithub = () => {
-    const url = 'https://github.com/ilearnit/PCRDA';
-    window.open(url, '_blank');
-  }
-
   render() {
     return (
       <div className="sticky-top">
@@ -54,16 +34,16 @@ export default class Header extends React.Component {
           <Collapse isOpen={this.state.isOpen} navbar>
             <Nav className="ml-auto" navbar>
               <NavItem>
-                <NavLink href='#' onClick={this.onHelp}>Help</NavLink>
+                <NavLink href='/help/'>Help</NavLink>
               </NavItem>
               <NavItem>
-                <NavLink href='#' onClick={this.onAbout}>About</NavLink>
+                <NavLink href='/about/'>About</NavLink>
               </NavItem>
               <NavItem>
-                <NavLink href='#' onClick={this.onFuture}>Future</NavLink>
+                <NavLink href='https://trello.com/b/WBpyJukp/pcrda'>Future</NavLink>
               </NavItem>
               <NavItem>
-                <NavLink href='#' onClick={this.onGithub}>Github</NavLink>
+                <NavLink href='https://github.com/ilearnit/PCRDA'>Github</NavLink>
               </NavItem>
             </Nav>
           </Collapse>

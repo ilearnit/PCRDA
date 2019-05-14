@@ -27,7 +27,7 @@ class PCRIndex extends React.Component {
       sourceKey2: '',
       sampleDoubleHole: [0, 0],
       internalReferenceDoubleHole: [0, 0],
-      referenceGroupDoubleHole: [0, 0], 
+      referenceGroupDoubleHole: [1, 0],
       result: [],
       showResult: false,
     };
@@ -48,7 +48,7 @@ class PCRIndex extends React.Component {
   setSampleDoubleHoleStart = (selectedOption) => {
     this.state.sampleDoubleHole[0] = selectedOption.value;
     this.setState({
-      sampleDoubleHole: this.state.sampleDoubleHole 
+      sampleDoubleHole: this.state.sampleDoubleHole
     });
   }
 
@@ -62,30 +62,30 @@ class PCRIndex extends React.Component {
   setInternalReferenceDoubleHoleStart = (selectedOption) => {
     this.state.internalReferenceDoubleHole[0] = selectedOption.value;
     this.setState({
-      internalReferenceDoubleHoleStart: this.state.internalReferenceDoubleHole 
+      internalReferenceDoubleHoleStart: this.state.internalReferenceDoubleHole
     });
-  } 
+  }
 
   setInternalReferenceDoubleHoleEnd = (selectedOption) => {
     this.state.internalReferenceDoubleHole[1] = selectedOption.value;
     this.setState({
-      internalReferenceDoubleHoleEnd: this.state.internalReferenceDoubleHole 
+      internalReferenceDoubleHoleEnd: this.state.internalReferenceDoubleHole
     });
-  } 
+  }
 
   setReferenceGroupDoubleHoleStart = (selectedOption) => {
     this.state.referenceGroupDoubleHole[0] = selectedOption.value;
     this.setState({
       referenceGroupDoubleHoleStart: this.state.referenceGroupDoubleHole
-    }); 
-  } 
+    });
+  }
 
   setReferenceGroupDoubleHoleEnd = (selectedOption) => {
     this.state.referenceGroupDoubleHole[1] = selectedOption.value;
     this.setState({
       referenceGroupDoubleHoleEnd: this.state.referenceGroupDoubleHole
-    }); 
-  } 
+    });
+  }
 
   handleSubmit = () => {
     let sourceKey1 = this.state.sourceKey1;
@@ -101,18 +101,15 @@ class PCRIndex extends React.Component {
 
     pcrAPI.dataAnalysis(sourceKey1, sourceKey2, sampleDoubleHole, internalReferenceDoubleHole, referenceGroupDoubleHole).then(res => {
       this.setState({
-        result: res.data.result,  
+        result: res.data.result,
         showResult: true,
-        // sampleDoubleHole: '',
-        // internalReferenceDoubleHole: '',
-        // referenceGroupDoubleHole: ''
       })
     })
   }
 
   toggleDialog = () => {
     this.setState({
-      showResult: false  
+      showResult: false
     })
   }
 
