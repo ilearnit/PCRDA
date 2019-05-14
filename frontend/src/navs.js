@@ -26,18 +26,23 @@ export default class Header extends React.Component {
   }
 
   onFuture = () => {
-    const url = "https://trello.com/b/WBpyJukp/pcrda";
-    window.open(url, "_blank");
+    const url = 'https://trello.com/b/WBpyJukp/pcrda';
+    window.open(url, '_blank');
   }
 
   onAbout = () => {
-    const url = "/about/";
-    window.open(url, "_blank");
+    const url = '/about/';
+    window.open(url, '_blank');
   }
 
   onHelp = () => {
-    const url = "/help/";
-    window.open(url, "_blank");
+    const url = '/help/';
+    window.open(url, '_blank');
+  }
+
+  onGithub = () => {
+    const url = 'https://github.com/ilearnit/PCRDA';
+    window.open(url, '_blank');
   }
 
   render() {
@@ -49,13 +54,16 @@ export default class Header extends React.Component {
           <Collapse isOpen={this.state.isOpen} navbar>
             <Nav className="ml-auto" navbar>
               <NavItem>
-                <NavLink onClick={this.onHelp}>HELP</NavLink>
+                <NavLink href='#' onClick={this.onHelp}>Help</NavLink>
               </NavItem>
               <NavItem>
-                <NavLink onClick={this.onAbout}>ABOUT</NavLink>
+                <NavLink href='#' onClick={this.onAbout}>About</NavLink>
               </NavItem>
               <NavItem>
-                <NavLink onClick={this.onFuture}>FUTURE</NavLink>
+                <NavLink href='#' onClick={this.onFuture}>Future</NavLink>
+              </NavItem>
+              <NavItem>
+                <NavLink href='#' onClick={this.onGithub}>Github</NavLink>
               </NavItem>
             </Nav>
           </Collapse>
