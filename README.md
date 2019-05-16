@@ -11,15 +11,13 @@ Set up a virtualenv to install dependencies locally:
     $ virtualenv .virtualenv
     $ . .virtualenv/bin/activate
 
-Install python libraries by pip:
+Install python3 libraries by pip3:
 
-    $ pip install -r requirements.txt
+    $ pip3 install -r requirements.txt
 
 # Run and Verify
-```
     $ . .virtualenv/bin/activate
-    $ python manage.py runserver
-```
+    $ python3 manage.py runserver
 Then open your browser, and input http://localhost:8000/.
 
 
