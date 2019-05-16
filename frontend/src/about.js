@@ -30,7 +30,7 @@ class PCRHelp extends React.Component {
               <CardTitle>网站的未来</CardTitle>
               <CardText>
                 <ul>
-                  <li>支持更多的文件类型支持</li>
+                  <li>更多的文件类型支持</li>
                   <li>可以生成图像</li>
                   <li>可以输出为 Excel 文件</li>
                   <li>更友好的 UI 设计</li>
