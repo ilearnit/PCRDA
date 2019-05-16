@@ -28,6 +28,7 @@ class SelectEditor extends React.Component {
           value={selectedOption}
           onChange={this.handleChange}
           options={KEY_VALUE}
+          placeholder={'请输入或下拉选择………'}
         />
       </Col>
     );

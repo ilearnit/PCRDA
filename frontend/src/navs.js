@@ -34,16 +34,16 @@ export default class Header extends React.Component {
           <Collapse isOpen={this.state.isOpen} navbar>
             <Nav className="ml-auto" navbar>
               <NavItem>
-                <NavLink href='/help/'>Help</NavLink>
+                <NavLink href='/help/'>使用说明</NavLink>
               </NavItem>
               <NavItem>
-                <NavLink href='/about/'>About</NavLink>
+                <NavLink href='/about/'>关于</NavLink>
               </NavItem>
               <NavItem>
-                <NavLink href='https://trello.com/b/WBpyJukp/pcrda'>Future</NavLink>
+                <NavLink href='https://trello.com/b/WBpyJukp/pcrda'>目标</NavLink>
               </NavItem>
               <NavItem>
-                <NavLink href='https://github.com/ilearnit/PCRDA'>Github</NavLink>
+                <NavLink href='https://github.com/ilearnit/PCRDA'>源代码</NavLink>
               </NavItem>
             </Nav>
           </Collapse>

@@ -13,7 +13,7 @@ class ShowFile extends React.Component {
       value: [],
       files: [],
       page: 0,
-      key: '' 
+      key: ''
     };
   }
 
@@ -29,7 +29,7 @@ class ShowFile extends React.Component {
     this.setState({
       page: page
     });
-  } 
+  }
 
   render() {
     let onUploadFile = {
@@ -78,7 +78,7 @@ class ShowFile extends React.Component {
                   <th scope="row">{item.pos}</th>
                   <th>{item.cp}</th>
                 </tr>
-              );}) 
+              );})
             }
           </tbody>
         </Table>
@@ -92,7 +92,10 @@ class ShowFile extends React.Component {
             }
           </div>
         }
-        <FilePond server={onUploadFile}/>
+        <FilePond
+          server={onUploadFile}
+          labelIdle={'拖放文件 或 <span class="filepond--label-action">点击此处上传文件</span>'}
+        />
       </Col>
     );
   }

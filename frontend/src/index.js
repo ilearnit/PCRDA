@@ -95,7 +95,7 @@ class PCRIndex extends React.Component {
     let referenceGroupDoubleHole = this.state.referenceGroupDoubleHole;
 
     if (sourceKey1 == '' || sourceKey2 == '') {
-      toast("Please check if the source file exists or if the duplicate hole is selected correctly.", {position: toast.POSITION.TOP_CENTER});
+      toast("请检查源文件是否存在或是否正确选择了孔板位置。", {position: toast.POSITION.TOP_CENTER});
       return;
     }
 
@@ -120,32 +120,32 @@ class PCRIndex extends React.Component {
         <Header />
         <Container>
           <Row>
-            <ShowFile label={'Source File One'} setSourceKey={this.setSourceKey1} />
-            <ShowFile label={'Source File Two'} setSourceKey={this.setSourceKey2} />
+            <ShowFile label={'源文件一'} setSourceKey={this.setSourceKey1} />
+            <ShowFile label={'源文件二'} setSourceKey={this.setSourceKey2} />
             <Col>
               <br />
               <br />
-              <Label>{'Input sample double hole start and end(Tips: Choose from source data one): '}</Label>
+              <Label>{'请输入内参组所在的位置(说明: 文件一仅用于选取内参组所在位置): '}</Label>
               <Row>
-                <Operation label={'Start'} handleSelected={this.setSampleDoubleHoleStart} />
-                <Operation label={'End'} handleSelected={this.setSampleDoubleHoleEnd} />
+                <Operation label={'开始'} handleSelected={this.setSampleDoubleHoleStart} />
+                <Operation label={'结束'} handleSelected={this.setSampleDoubleHoleEnd} />
               </Row>
               <br />
-              <Label>{'Input internal reference double hole start and end(Tips: Choose from source data two): '}</Label>
+              <Label>{'请输入实验组所在的位置(说明: 文件二用于选取实验组所在位置): '}</Label>
               <Row>
-                <Operation label={'Start'} handleSelected={this.setInternalReferenceDoubleHoleStart} />
-                <Operation label={'End'} handleSelected={this.setInternalReferenceDoubleHoleEnd} />
-              </Row>
-
-              <br />
-              <Label>{'Input reference group double hole start and end(Tips: Choose from source data two): '}</Label>
-              <Row>
-                <Operation label={'Start'} handleSelected={this.setReferenceGroupDoubleHoleStart} />
-                <Operation label={'End'} handleSelected={this.setReferenceGroupDoubleHoleEnd} />
+                <Operation label={'开始'} handleSelected={this.setInternalReferenceDoubleHoleStart} />
+                <Operation label={'结束'} handleSelected={this.setInternalReferenceDoubleHoleEnd} />
               </Row>
 
               <br />
-              <Button onClick={this.handleSubmit} className={"float-right"}>Submit</Button>
+              <Label>{'请输入对照组所在的位置(说明: 文件二用于选取对照组所在位置): '}</Label>
+              <Row>
+                <Operation label={'开始'} handleSelected={this.setReferenceGroupDoubleHoleStart} />
+                <Operation label={'结束'} handleSelected={this.setReferenceGroupDoubleHoleEnd} />
+              </Row>
+
+              <br />
+              <Button onClick={this.handleSubmit} className={'float-right'}>提交</Button>
             </Col>
           </Row>
         </Container>

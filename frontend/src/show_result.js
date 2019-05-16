@@ -7,23 +7,23 @@ class ShowResult extends React.Component {
     return (
       <div>
         <Modal isOpen={true}>
-          <ModalHeader toggle={this.props.toggle}>ΔΔCT</ModalHeader>
+          <ModalHeader toggle={this.props.toggle}>0.5^ΔΔCT</ModalHeader>
           <ModalBody>
             <ul style={{'listStyle': 'none'}}>
               {this.props.result.map((item, index) => {
                 return (
-                  <li key={index}>{item}</li>    
-                )                                        
+                  <li key={index}>{item}</li>
+                )
               })}
             </ul>
           </ModalBody>
           <ModalFooter>
             <Button color="secondary" onClick={this.props.toggle}>Cancel</Button>
-        </ModalFooter>
+          </ModalFooter>
         </Modal>
       </div>
-      );
-    }
+    );
   }
+}
 
 export default ShowResult;
