@@ -24,8 +24,8 @@ class PCRHelp extends React.Component {
           <Card>
             <CardBody>
               <CardTitle>为什么做这个小网站</CardTitle>
-              <CardText>2018年国庆假期去找一位朋友，见到她在用 Excel 做 PCR 数据分析，感到略微有点耗时，更重要的是没人带我出去逛了啊！！(现在也没人带)
-              <br />于是就做了这个网站，前后经历了多次的改版，算是可以使用了。
+              <CardText>2018年国庆假期去找一位朋友，见到她在用 Excel 做 PCR 数据分析，感到略微有点耗时，更重要的是没人带我出去逛了啊！！
+              <br />于是就做了这个网站，希望可以节约更多人的时间。前后经历了多次的改版，算是可以使用了。
               </CardText>
               <CardTitle>网站的未来</CardTitle>
               <CardText>
