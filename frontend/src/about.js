@@ -24,8 +24,8 @@ class PCRHelp extends React.Component {
           <Card>
             <CardBody>
               <CardTitle>为什么做这个小网站</CardTitle>
-              <CardText>2018年国庆假期去找一位朋友，见到她在用 Excel 做 PCR 数据分析，感到略微有点耗时，更重要的是没人带我出去逛了啊！！
-              <br />于是就做了这个网站，希望可以节约更多人的时间。前后经历了多次的改版，算是可以使用了。
+              <CardText>2018年国庆假期去找一位朋友，见到她在用 Excel 做 PCR 数据分析，感到略微有点耗时，遂决定做一个 PCR 相关的网站.
+              <br />希望可以节约更多人的时间。前后经历了多次的改版，算是可以使用了。
               </CardText>
               <CardTitle>网站的未来</CardTitle>
               <CardText>
@@ -41,9 +41,10 @@ class PCRHelp extends React.Component {
               <CardTitle>联系</CardTitle>
                 <CardText>如有你有以下情况请与我联系：
                   <br />1. 此时挣扎在实验数据分析的泥潭中，想用一种更便捷的方式处理它的你。（数据规模仅限 10W 以下）
-                  <br />2. 对于本网站有自己的看法，能够提高其他用户的体验的你。（强烈建议联系，我需要你的帮助。）
-                  <br />3. 对于源代码有需求的你。（本打算开源的，奈何本人代码写的让本人不满意。）
-                  <br />4. 希望贡献代码的你。（尤其是前端 UI，当然如果你愿意贡献设计原图，若被采用，任它天高地远，必将当面答谢。）
+                  <br />2. 对于本网站有自己的看法，能够提高其他用户的体验的你。（强烈建议联系）
+                  <br />3. 对于源代码有需求的你。（代码整理完后会进行开源。）
+                  <br />4. 希望贡献代码的你。(本网站技术栈： python3 + Django + Django rest framework + react + webpack)
+                  <br />
                   <CardImg style={{'width': '25%'}} src='/static/wechat.jpeg'/>
                </CardText>
             </CardBody>
