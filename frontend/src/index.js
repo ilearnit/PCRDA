@@ -1,7 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { PcrAPI } from './utils/api';
-import { Label, Container, Row, Col, Button } from 'reactstrap';
+import { Label, Container, Row, Col, Button, Input } from 'reactstrap';
 import cookie from 'react-cookies';
 
 import { toast } from 'react-toastify';
@@ -125,20 +125,32 @@ class PCRIndex extends React.Component {
             <Col>
               <br />
               <br />
-              <Label>{'请输入内参组所在的位置(说明: 文件一仅用于选取内参组所在位置): '}</Label>
+              <Label>{'一、请输入内参组所在的位置及引物名称(说明: 文件一仅用于选取内参组所在位置): '}</Label>
+              <Row>
+                <Label sm={2}>{'引物名称'}</Label>
+                <Col>
+                  <Input placeholder="请输入内参组引物名称……" />
+                </Col>
+              </Row>
               <Row>
                 <Operation label={'开始'} handleSelected={this.setSampleDoubleHoleStart} />
                 <Operation label={'结束'} handleSelected={this.setSampleDoubleHoleEnd} />
               </Row>
               <br />
-              <Label>{'请输入实验组所在的位置(说明: 文件二用于选取实验组所在位置): '}</Label>
+              <Label>{'二、请输入实验组所在的位置及引物名称(说明: 文件二用于选取实验组所在位置): '}</Label>
+              <Row>
+                <Label sm={2}>{'引物名称'}</Label>
+                <Col>
+                  <Input placeholder="请输入实验组引物名称……" />
+                </Col>
+              </Row>
               <Row>
                 <Operation label={'开始'} handleSelected={this.setInternalReferenceDoubleHoleStart} />
                 <Operation label={'结束'} handleSelected={this.setInternalReferenceDoubleHoleEnd} />
               </Row>
 
               <br />
-              <Label>{'请输入对照组所在的位置(说明: 文件二用于选取对照组所在位置): '}</Label>
+              <Label>{'请输入实验对照组所在的位置(说明: 文件二用于选取对照组所在位置): '}</Label>
               <Row>
                 <Operation label={'开始'} handleSelected={this.setReferenceGroupDoubleHoleStart} />
                 <Operation label={'结束'} handleSelected={this.setReferenceGroupDoubleHoleEnd} />
