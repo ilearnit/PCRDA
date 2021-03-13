@@ -1,7 +1,7 @@
 <template>
   <GlobalHeader />
   <router-view></router-view>
-  <footer class="text-center py-4 text-secondary bg-light mt-6">
+  <footer class="text-center py-4 text-secondary bg-light">
       <small>
         <ul class="list-inline mb-0">
           <li class="list-inline-item">© 2021 PCR.XYZ</li>
@@ -31,10 +31,8 @@ export default defineComponent({
 }
 #app {
   width:100%;
-  height: 100%;
-  /* position: absolute; */
-  /* /* height: 100%;  */
-  box-sizing: border-box ; position: relative;
+  height: 500px;
+  position: absolute;
 }
 html,
 body { height: 100%; padding: 0; margin: 0; }

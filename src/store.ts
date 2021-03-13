@@ -5,9 +5,11 @@ interface UserProps {
   isLogin: boolean;
   number?: number;
 }
+
 export interface GloabalDataProps {
   user: UserProps;
 }
+
 const store = createStore<GloabalDataProps>({
   state:{
     user: { isLogin: true }

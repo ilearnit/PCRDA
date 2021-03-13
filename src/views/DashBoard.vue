@@ -1,6 +1,6 @@
 <template>
   
-    <el-container>
+    <el-container class="min-80">
       <el-main><Tabs /></el-main>
       <el-aside width="30%"><Aside /></el-aside>
     </el-container>
@@ -25,6 +25,9 @@ export default defineComponent({
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
+  .min-80 {
+    min-height: 85%;
+  }
   .el-header, .el-footer {
     background-color: #B3C0D1;
     color: #333;
@@ -40,12 +43,7 @@ export default defineComponent({
   }
 
   .el-main {
-    /* background-color: #E9EEF3;
-    color: #333; */
     text-align: center;
-    /* line-height: 160px; */
-    /* border-style: dashed;
-    border-color: burlywood; */
   }
 
   body > .el-container {
