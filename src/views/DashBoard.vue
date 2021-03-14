@@ -2,7 +2,7 @@
   
     <el-container class="min-80">
       <el-main><Tabs /></el-main>
-      <el-aside width="30%"><Aside /></el-aside>
+      <el-aside width="35%"><Aside /></el-aside>
     </el-container>
 </template>
 

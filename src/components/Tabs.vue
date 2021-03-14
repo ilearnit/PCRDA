@@ -7,24 +7,25 @@
       :label="item.title"
       :name="item.name"
     >
-      <TabContent />
+      <TabContent/>
     </el-tab-pane>
   </el-tabs>
 </template>
 
 <script>
 import { defineComponent, ref} from "vue"
-
 import TabContent  from './TabContent.vue'
+import emitter from "../bus"
+
 export default defineComponent({
   name: "Tabs",
   components: {
-
     TabContent,
-  },    
-  data() {  
+  },  
+  data() {
       const addable = ref(true)
       const closable = ref(true)
+
       return {
         addable,
         closable,
@@ -72,9 +73,10 @@ export default defineComponent({
 
             // 限制 tab 减少的数量
             if(this.editableTabs.length > 1 ){
-              this.editableTabs = tabs.filter(tab => tab.name !== targetName);
+              this.editableTabs = tabs.filter(tab => tab.name !== targetName)       
             } else {
               this.closable = false
+              emitter.emit("clearTabTable")
             }
 
             this.addable = this.editableTabs.length <= 2 ? true : false
